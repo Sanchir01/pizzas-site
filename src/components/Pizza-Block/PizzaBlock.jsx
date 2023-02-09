@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const PizzaBlock = ({imageUrl,title,sizes,types}) => {
+const PizzaBlock = ({imageUrl,title,sizes,types,price}) => {
     const typeNames = ['Тонкое', 'Традиционнное']
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
@@ -16,19 +16,19 @@ const PizzaBlock = ({imageUrl,title,sizes,types}) => {
       <div className="pizza-block__selector">
         <ul>
             {
-                types.map((type,i) => (
-                    <li onClick={() => setActiveType(i)} className={activeType === i ? 'active' : ''}>{typeNames[type]}</li>
+                types.map((type) => (
+                    <li key={type} onClick={() => setActiveType(type)} className={activeType === type ? 'active' : ''}>{typeNames[type]}</li>
                 ))
             }
         </ul>
         <ul>
             {
-                sizes.map((size, i) => <li onClick={() => setActiveSize(i)} className={activeSize === i ? 'active' : ''}>{size} см</li>)
+                sizes.map((size, i) => <li key={i} onClick={() => setActiveSize(i)} className={activeSize === i ? 'active' : ''}>{size} см</li>)
             }
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от 395 ₽</div>
+        <div className="pizza-block__price">от {price} ₽</div>
         <div className="button button--outline button--add">
           <svg
             width="12"

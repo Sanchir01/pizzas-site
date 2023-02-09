@@ -1,35 +1,27 @@
 import React from "react";
 import "./scss/app.scss";
 
-import Categories from "./components/Categories";
-import Sort from "./components/Sort";
-import PizzaBlock from "./components/PizzaBlock";
 import Header from "./components/Header";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import {Route, Routes} from "react-router-dom";
 
-import pizza from "./assets/pizza.json"
 
 function App() {
-  return (
-    <div className="wrapper">
-      <Header />
-      <div className="content">
-        <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-              {
-                  pizza.map(obj => (
-                      <PizzaBlock  {...obj}/>
-                  ))
-              }
-          </div>
+    const [searchValue,setSearchValue] = React.useState('')
+    return (
+        <div className="wrapper">
+            <Header searchValue={searchValue} setSearchValue={setSearchValue}/>
+            <div className="content">
+                <div className="container">
+                   <Routes>
+                       <Route path="/" element={<Home searchValue={searchValue} />} />
+                       <Route path="*" element={<NotFound />} />
+                   </Routes>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default App;

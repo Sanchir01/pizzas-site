@@ -1,0 +1,24 @@
+.root {
+  li {
+    display: inline-block;
+  }
+
+  a {
+    border: 1px solid black;
+    border-radius: 30px;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    margin-right: 10px;
+    line-height: 45px;
+    cursor: pointer;
+    display: inline-block;
+
+    &:hover {
+      background-color: #fe5f1e;
+      color: #fff;
+    }
+  }
+}
+
+

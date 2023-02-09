@@ -1,0 +1,25 @@
+.root {
+  position: relative;
+}
+.search {
+  width:20px;
+  height:20px;
+  position: absolute;
+  top: 15px;
+  cursor: pointer;
+}
+.input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding:12px 40px 20px 0px;
+  width: 300px;
+  border-radius:10px;
+  text-align: center;
+}
+.close {
+  position: absolute;
+  width:20px;
+  height:20px;
+  right: 10px;
+  top: 15px;
+  cursor: pointer;
+}
