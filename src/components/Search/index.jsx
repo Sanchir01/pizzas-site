@@ -6,13 +6,20 @@ import {SearchContext} from "../../App";
 
 const Search = () => {
     const {searchValue, setSearchValue} = React.useContext(SearchContext)
+
+    const inputRef = React.useRef()
+    const onClickValue = () => {
+        setSearchValue('');
+        inputRef.current.focus();
+    }
+    // React.useEffect()
     return (
         <div className={styles.root}>
             <img className={styles.search} src={logoSearch} alt="ser-icon"/>
-            <input value={searchValue} onChange={event => setSearchValue(event.target.value)} className={styles.input}
+            <input ref={inputRef} value={searchValue} onChange={event => setSearchValue(event.target.value)} className={styles.input}
                    placeholder="Search pizzas..."/>
             {searchValue && (
-                <img onClick={() => setSearchValue('')} className={styles.close} src={logoClose} alt="close-icon"/>)}
+                <img onClick={onClickValue} className={styles.close} src={logoClose} alt="close-icon"/>)}
         </div>
     )
 }

@@ -7,11 +7,12 @@ import Skeleton from "../components/Pizza-Block/Skeleton";
 import PizzaBlock from "../components/Pizza-Block/PizzaBlock";
 import Pagination from "../components/Pagination";
 import {setCategoryId} from "../redux/slice/filterSlice";
+import axios from "axios";
 
 
 const Home = ({searchValue}) => {
     const dispatch = useDispatch()
-    const {categoryId,sort} = useSelector(state => state.filter)
+    const {categoryId, sort} = useSelector(state => state.filter)
 
     const [items, setItems] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
@@ -28,20 +29,20 @@ const Home = ({searchValue}) => {
         const sortBy = sort.sortProperty.replace('-', '');
         const category = categoryId > 0 ? `&category=${categoryId}` : ''
         const search = searchValue ? `&search=${searchValue}` : ''
-        fetch(`https://63be7d1df5cfc0949b58980f.mockapi.io/item?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`).then(res => {
-            return res.json()
-        }).then(arr => {
-            setItems((arr))
-            setIsLoading(false)
-        })
+        axios.get(`https://63be7d1df5cfc0949b58980f.mockapi.io/item?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
+            .then(res => {
+                setItems((res.data))
+                setIsLoading(false)
+
+            })
         window.scrollTo(0, 0)
     }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
     return (
         <>
             <div className="content__top">
-                <Categories value={categoryId} onClickCategory={ onChangeCategory}/>
-                <Sort />
+                <Categories value={categoryId} onClickCategory={onChangeCategory}/>
+                <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
