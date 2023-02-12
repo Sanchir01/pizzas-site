@@ -18,14 +18,27 @@ const Categories = () => {
         sortProperty: '-price'
     }, {name: 'алфавиту(DESC)', sortProperty: 'title'}, {name: 'алфавиту(ASC)', sortProperty: '-title'}]
 
+    const sortRef = React.useRef()
+
     const [open, setOpen] = React.useState(false)
 
     const onClickListItem = (obj) => {
         dispatch(setSort(obj))
         setOpen(false)
+        console.log(sortRef)
     }
+    React.useEffect(() => {
+        const handleClickOutside = (event) => {
+            let path = event.composedPath().includes(sortRef.current);
+            if (!path) setOpen(false);
+        };
+
+        document.body.addEventListener('click', handleClickOutside);
+
+        return () => document.body.removeEventListener('click', handleClickOutside);
+    }, []);
     return (
-        <div className="sort">
+        <div ref={sortRef} className="sort">
             <div className="sort__label">
                 <svg
                     width="10"
